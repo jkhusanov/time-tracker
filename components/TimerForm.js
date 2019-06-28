@@ -1,10 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, View, Text, TextInput } from 'react-native';
+import PropTypes from 'prop-types';
 
 import TimerButton from './TimerButton';
 
 export default function TimerForm({ id, title, project }) {
+  const [titleInput, setTitleInput] = useState(id ? title : '');
+  const [projectInput, setProjectInput] = useState(id ? project : '');
+
   const submitText = id ? 'Update' : 'Create';
+
+  const handleTitleChange = newTitle => {
+    setTitleInput(newTitle);
+  };
+
+  const handleProjectChange = newProject => {
+    setProjectInput(newProject);
+  };
+
   return (
     <View style={styles.formContainer}>
       <View style={styles.attributeContainer}>
@@ -13,7 +26,8 @@ export default function TimerForm({ id, title, project }) {
           <TextInput
             style={styles.textInput}
             underlineColorAndroid="transparent"
-            defaultValue={title}
+            onChangeText={handleTitleChange}
+            value={titleInput}
           />
         </View>
       </View>
@@ -23,7 +37,8 @@ export default function TimerForm({ id, title, project }) {
           <TextInput
             style={styles.textInput}
             underlineColorAndroid="transparent"
-            defaultValue={project}
+            onChangeText={handleProjectChange}
+            value={projectInput}
           />
         </View>
       </View>
@@ -34,6 +49,18 @@ export default function TimerForm({ id, title, project }) {
     </View>
   );
 }
+
+TimerForm.propTypes = {
+  id: PropTypes.string,
+  title: PropTypes.string,
+  project: PropTypes.string,
+};
+
+TimerForm.defaultProps = {
+  id: '',
+  title: '',
+  project: '',
+};
 
 const styles = StyleSheet.create({
   formContainer: {
