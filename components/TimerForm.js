@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 import TimerButton from './TimerButton';
 
-export default function TimerForm({ id, title, project }) {
+export default function TimerForm({ id, title, project, onFormClose, onFormSubmit }) {
   const [titleInput, setTitleInput] = useState(id ? title : '');
   const [projectInput, setProjectInput] = useState(id ? project : '');
 
@@ -16,6 +16,14 @@ export default function TimerForm({ id, title, project }) {
 
   const handleProjectChange = newProject => {
     setProjectInput(newProject);
+  };
+
+  const handleSubmit = () => {
+    onFormSubmit({
+      id,
+      titleInput,
+      projectInput,
+    });
   };
 
   return (
@@ -43,8 +51,8 @@ export default function TimerForm({ id, title, project }) {
         </View>
       </View>
       <View style={styles.buttonGroup}>
-        <TimerButton small color="#21BA45" title={submitText} />
-        <TimerButton small color="#DB2828" title="Cancel" />
+        <TimerButton small color="#21BA45" title={submitText} onPress={handleSubmit} />
+        <TimerButton small color="#DB2828" title="Cancel" onPress={onFormClose} />
       </View>
     </View>
   );
@@ -54,10 +62,12 @@ TimerForm.propTypes = {
   id: PropTypes.string,
   title: PropTypes.string,
   project: PropTypes.string,
+  onFormClose: PropTypes.func.isRequired,
+  onFormSubmit: PropTypes.func.isRequired,
 };
 
 TimerForm.defaultProps = {
-  id: '',
+  id: null,
   title: '',
   project: '',
 };
