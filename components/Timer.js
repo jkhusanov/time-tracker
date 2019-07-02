@@ -26,7 +26,7 @@ Timer.propTypes = {
   // id: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   project: PropTypes.string.isRequired,
-  elapsed: PropTypes.string.isRequired,
+  elapsed: PropTypes.number.isRequired,
   onEditPress: PropTypes.func.isRequired,
 };
 

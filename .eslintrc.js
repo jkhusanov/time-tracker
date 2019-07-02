@@ -19,6 +19,7 @@ module.exports = {
     'no-mixed-operators': 0,
     'arrow-parens': 0,
     'object-curly-newline': 0,
+    'comma-dangle': 0,
     'react-hooks/rules-of-hooks': 'error',
     'react-hooks/exhaustive-deps': 'warn',
     'no-unused-vars': ['error', { varsIgnorePattern: '[set]' }],
