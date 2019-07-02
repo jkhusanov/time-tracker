@@ -21,8 +21,8 @@ export default function TimerForm({ id, title, project, onFormClose, onFormSubmi
   const handleSubmit = () => {
     onFormSubmit({
       id,
-      titleInput,
-      projectInput,
+      title: titleInput,
+      project: projectInput,
     });
   };
 
