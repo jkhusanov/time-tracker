@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, ScrollView } from 'react-native';
 import uuidv4 from 'uuid/v4';
 
@@ -30,6 +30,27 @@ export default function App() {
       isRunning: false,
     },
   ]);
+
+  useEffect(() => {
+    const TIME_INTERVAL = 1000;
+
+    const intervalId = setInterval(() => {
+      setTimers(
+        timers.map(timer => {
+          const { elapsed, isRunning } = timer;
+          return {
+            ...timer,
+            elapsed: isRunning ? elapsed + TIME_INTERVAL : elapsed,
+          };
+        })
+      );
+    }, TIME_INTERVAL);
+
+    // Acts like a ComponentWillUnmount to cleanup
+    return () => {
+      clearInterval(intervalId);
+    };
+  });
 
   const handleCreateFormSubmit = timer => {
     setTimers([newTimer(timer), ...timers]);
