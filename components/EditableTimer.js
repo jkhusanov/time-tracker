@@ -4,7 +4,15 @@ import PropTypes from 'prop-types';
 import TimerForm from './TimerForm';
 import Timer from './Timer';
 
-export default function EditableTimer({ id, title, project, elapsed, isRunning, onFormSubmit }) {
+export default function EditableTimer({
+  id,
+  title,
+  project,
+  elapsed,
+  isRunning,
+  onFormSubmit,
+  onRemovePress,
+}) {
   const [editFormOpen, setEditFormOpen] = useState(false);
 
   const handleEditPress = () => {
@@ -48,6 +56,7 @@ export default function EditableTimer({ id, title, project, elapsed, isRunning, 
       elapsed={elapsed}
       isRunning={isRunning}
       onEditPress={handleEditPress}
+      onRemovePress={onRemovePress}
     />
   );
 }
@@ -59,4 +68,5 @@ EditableTimer.propTypes = {
   elapsed: PropTypes.number.isRequired,
   isRunning: PropTypes.bool.isRequired,
   onFormSubmit: PropTypes.func.isRequired,
+  onRemovePress: PropTypes.func.isRequired,
 };

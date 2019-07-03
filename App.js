@@ -52,6 +52,10 @@ export default function App() {
     );
   };
 
+  const handleFormRemove = timerId => {
+    setTimers(timers.filter(timer => timer.id !== timerId));
+  };
+
   return (
     <View style={styles.appContainer}>
       <View style={styles.titleContainer}>
@@ -68,6 +72,7 @@ export default function App() {
             elapsed={elapsed}
             isRunning={isRunning}
             onFormSubmit={handleFormSubmit}
+            onRemovePress={handleFormRemove}
           />
         ))}
       </ScrollView>
