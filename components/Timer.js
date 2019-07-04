@@ -5,11 +5,37 @@ import PropTypes from 'prop-types';
 import { millisecondsToHuman } from '../utils/TimerUtils';
 import TimerButton from './TimerButton';
 
-export default function Timer({ id, title, project, elapsed, onEditPress, onRemovePress }) {
+export default function Timer({
+  id,
+  title,
+  project,
+  elapsed,
+  isRunning,
+  onEditPress,
+  onRemovePress,
+  onStartPress,
+  onStopPress,
+}) {
   const elapsedString = millisecondsToHuman(elapsed);
 
   const handleRemovePress = () => {
     onRemovePress(id);
+  };
+
+  const handleStartPress = () => {
+    onStartPress(id);
+  };
+
+  const handleStopPress = () => {
+    onStopPress(id);
+  };
+
+  const renderActionButton = () => {
+    if (isRunning) {
+      return <TimerButton color="#DB2828" title="Stop" onPress={handleStopPress} />;
+    }
+
+    return <TimerButton color="#21BA45" title="Start" onPress={handleStartPress} />;
   };
 
   return (
@@ -21,7 +47,7 @@ export default function Timer({ id, title, project, elapsed, onEditPress, onRemo
         <TimerButton color="blue" small title="Edit" onPress={onEditPress} />
         <TimerButton color="blue" small title="Remove" onPress={handleRemovePress} />
       </View>
-      <TimerButton color="#21BA45" title="Start" />
+      {renderActionButton()}
     </View>
   );
 }
@@ -31,8 +57,11 @@ Timer.propTypes = {
   title: PropTypes.string.isRequired,
   project: PropTypes.string.isRequired,
   elapsed: PropTypes.number.isRequired,
+  isRunning: PropTypes.bool.isRequired,
   onEditPress: PropTypes.func.isRequired,
   onRemovePress: PropTypes.func.isRequired,
+  onStartPress: PropTypes.func.isRequired,
+  onStopPress: PropTypes.func.isRequired,
 };
 
 const styles = StyleSheet.create({
