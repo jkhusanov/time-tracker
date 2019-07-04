@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, ScrollView, KeyboardAvoidingView } from 'react-native';
 import uuidv4 from 'uuid/v4';
 
 import { newTimer } from './utils/TimerUtils';
@@ -23,8 +23,8 @@ export default function App() {
       isRunning: false,
     },
     {
-      title: 'Cook food',
-      project: 'Home',
+      title: 'Learn React Hooks',
+      project: 'Work Chores',
       id: uuidv4(),
       elapsed: 2244244,
       isRunning: false,
@@ -97,29 +97,34 @@ export default function App() {
       <View style={styles.titleContainer}>
         <Text style={styles.title}>Timers</Text>
       </View>
-      <ScrollView style={styles.timerList} alwaysBounceVertical>
-        <ToggleableTimerForm onFormSubmit={handleCreateFormSubmit} />
-        {timers.map(({ title, project, id, elapsed, isRunning }) => (
-          <EditableTimer
-            key={id}
-            id={id}
-            title={title}
-            project={project}
-            elapsed={elapsed}
-            isRunning={isRunning}
-            onFormSubmit={handleFormSubmit}
-            onRemovePress={handleFormRemove}
-            onStartPress={toggleTimer}
-            onStopPress={toggleTimer}
-          />
-        ))}
-      </ScrollView>
+      <KeyboardAvoidingView behavior="padding" style={styles.timerListContainer}>
+        <ScrollView style={styles.timerList} alwaysBounceVertical>
+          <ToggleableTimerForm onFormSubmit={handleCreateFormSubmit} />
+          {timers.map(({ title, project, id, elapsed, isRunning }) => (
+            <EditableTimer
+              key={id}
+              id={id}
+              title={title}
+              project={project}
+              elapsed={elapsed}
+              isRunning={isRunning}
+              onFormSubmit={handleFormSubmit}
+              onRemovePress={handleFormRemove}
+              onStartPress={toggleTimer}
+              onStopPress={toggleTimer}
+            />
+          ))}
+        </ScrollView>
+      </KeyboardAvoidingView>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   appContainer: {
+    flex: 1,
+  },
+  timerListContainer: {
     flex: 1,
   },
   titleContainer: {
