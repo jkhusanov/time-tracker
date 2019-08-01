@@ -2,7 +2,7 @@
 
 <p align="center">
   <a href="https://www.fullstackreact.com/react-native/">
-    <img alt="Weather app" src="assets/icon.png" width="250">
+    <img alt="Time tracker app" src="assets/icon.png" width="250">
   </a>
 </p>
 
