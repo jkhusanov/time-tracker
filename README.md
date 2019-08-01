@@ -34,7 +34,7 @@ It's a simple app from the second chapter of the book
 ```
 git clone https://github.com/jkhusanov/time-tracker.git
 
-cd weather
+cd time-tracker
 
 yarn install
 
